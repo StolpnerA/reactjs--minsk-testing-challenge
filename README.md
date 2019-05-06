@@ -1,0 +1,1 @@
+# reactjs--minsk-testing-challenge
