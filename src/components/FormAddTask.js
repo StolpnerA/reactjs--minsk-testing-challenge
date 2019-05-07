@@ -6,6 +6,7 @@ const initState = {
   description: '',
   date: '2019-05-06',
   priority: '',
+  done: false,
 };
 
 class FormAddTask extends Component {
@@ -13,17 +14,17 @@ class FormAddTask extends Component {
     super(props);
     this.state = Object.assign({}, initState);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handlerChange = this.handlerChange.bind(this);
+    this.handlerClick = this.handlerClick.bind(this);
   }
 
-  handleChange(e, name) {
+  handlerChange(e, name) {
     this.setState({
       [name]: e.target.value,
     });
   }
 
-  handleClick() {
+  handlerClick() {
     this.props.addTask(this.state);
     this.setState(Object.assign({}, initState));
   }
@@ -46,13 +47,13 @@ class FormAddTask extends Component {
               type="text"
               value={ this.state.title }
               placeholder="Title"
-              onChange={ (e) => this.handleChange(e, 'title') }
+              onChange={ (e) => this.handlerChange(e, 'title') }
             />
           </div>
           <div>
             <select
               value={ this.state.priority }              
-              onChange={ (e) => this.handleChange(e, 'priority') }>
+              onChange={ (e) => this.handlerChange(e, 'priority') }>
               { priorityOptions }
             </select>
           </div>
@@ -60,7 +61,7 @@ class FormAddTask extends Component {
             <input
               type="date"
               value={ this.state.date }
-              onChange={ (e) => this.handleChange(e, 'date') }
+              onChange={ (e) => this.handlerChange(e, 'date') }
             />
           </div>
         </div>
@@ -68,13 +69,13 @@ class FormAddTask extends Component {
           <textarea
             placeholder="Desctiption"
             value={ this.state.description }
-            onChange={ (e) => this.handleChange(e, 'description') }
+            onChange={ (e) => this.handlerChange(e, 'description') }
           />
         </div>
         <input
           type="submit"
           value="Add"
-          onClick={ this.handleClick }
+          onClick={ this.handlerClick }
         />
       </div>
     )
