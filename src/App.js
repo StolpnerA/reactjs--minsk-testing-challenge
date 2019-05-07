@@ -12,6 +12,7 @@ class App extends Component {
     };
 
     getTasks().then((tasks) => {
+      if (!tasks) return;
       this.setState({
         items: tasks,
       });
