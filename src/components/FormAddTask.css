@@ -1,0 +1,11 @@
+.formAddTask {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 1px red;
+  padding: 5px;
+}
+
+.formAddTask__mainData {
+  display: flex;
+}
