@@ -65,13 +65,11 @@ class FormAddTask extends Component {
             />
           </div>
         </div>
-        <div>
-          <textarea
-            placeholder="Desctiption"
-            value={ this.state.description }
-            onChange={ (e) => this.handlerChange(e, 'description') }
-          />
-        </div>
+        <textarea
+          placeholder="Desctiption"
+          value={ this.state.description }
+          onChange={ (e) => this.handlerChange(e, 'description') }
+        />
         <input
           type="submit"
           value="Add"
