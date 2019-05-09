@@ -4,6 +4,7 @@ import FormAddTask from './components/FormAddTask';
 import FormFilter from './components/FormFilter';
 import TableItems from './components/TableItems';
 import { updateTasks, getTasks } from './api';
+import { FILTER_FIELDS } from './helpers/constants';
 
 class App extends Component {
   constructor() {
@@ -64,9 +65,25 @@ class App extends Component {
     }
     let filteringItems = this.state.items;
     Object.keys(filters).forEach(field => {
-      filteringItems = filteringItems.filter(item => {
-        return item[field] === filters[field];
-      })
+      switch(field) {
+        case FILTER_FIELDS.done:
+        case FILTER_FIELDS.date:
+          filteringItems = filteringItems.filter(item => {
+            return item[field] === filters[field];
+          })
+          break;
+        case FILTER_FIELDS.search:
+          filteringItems = filteringItems.filter(item => {
+            const { title, description } = item;
+            const searchValue = filters[field].toLowerCase();
+            if (title.toLowerCase().indexOf(searchValue) === -1 && description.toLowerCase().indexOf(searchValue) === -1) {
+              return false
+            }
+            return true
+          })
+          break;
+        default: break;
+      }
     })
     this.setState({
       filteredItems: filteringItems,

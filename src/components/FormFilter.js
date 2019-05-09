@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './FormFilter.css'
+import { FILTER_FIELDS } from '../helpers/constants';
 
 class FormFilter extends Component {
   constructor(props) {
@@ -23,15 +24,17 @@ class FormFilter extends Component {
         <div>
           <input
             type="checkbox"
-            onChange={ (e) => this.handlerChange(e.target.checked, 'done') }/> Show completed
+            onChange={ (e) => this.handlerChange(e.target.checked, FILTER_FIELDS.done) }/> Show completed
           <input
             type="date"
-            onChange={ (e) => this.handlerChange(e.target.value, 'date') }
+            onChange={ (e) => this.handlerChange(e.target.value, FILTER_FIELDS.date) }
           />
         </div>
         <input
           type="text"
-          placeholder="Text search (title + description)"/>
+          placeholder="Text search (title + description)"
+          onChange={ (e) => this.handlerChange(e.target.value, FILTER_FIELDS.search) }
+        />
       </div>
     )
   }
