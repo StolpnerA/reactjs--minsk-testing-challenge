@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './TableBody.css';
 
 class TableBody extends Component {
   constructor(props) {
@@ -11,10 +12,22 @@ class TableBody extends Component {
     this.props.changeStatusTask(e.target.checked, indexItem);
   }
 
+  getToday() {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
   render() {
     const rows = this.props.items.map((item, index) => {
+      const isToday = item.date === this.getToday();
       return (
-        <tr key={index}>
+        <tr
+          key={index}
+          className={ isToday ? 'tableBody__today' : null }
+        >
           <td>{ index }</td>
           <td>
             <input
