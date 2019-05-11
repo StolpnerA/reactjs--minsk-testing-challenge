@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './TableBody.css';
+import { classList } from '../helpers/utils';
 
 class TableBody extends Component {
   constructor(props) {
@@ -23,10 +24,14 @@ class TableBody extends Component {
   render() {
     const rows = this.props.items.map((item, index) => {
       const isToday = item.date === this.getToday();
+
       return (
         <tr
           key={index}
-          className={ isToday ? 'tableBody__today' : null }
+          className={classList({
+            'tableBody__today': isToday,
+            'tableBody__done': item.done,
+          })}
         >
           <td>{ index }</td>
           <td>

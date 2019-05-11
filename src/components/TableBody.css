@@ -1,3 +1,7 @@
 .tableBody__today {
   color: red;
 }
+
+.tableBody__done {
+  text-decoration: line-through;
+}
