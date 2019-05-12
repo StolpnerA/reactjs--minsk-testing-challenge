@@ -6,11 +6,11 @@ class TableBody extends Component {
   constructor(props) {
     super(props);
     
-    this.handlerChangeDone = this.handlerChangeDone.bind(this);
+    this.handlerChangeChecked = this.handlerChangeChecked.bind(this);
   }
 
-  handlerChangeDone(e, indexItem) {
-    this.props.changeStatusTask(e.target.checked, indexItem);
+  handlerChangeChecked(e, indexItem) {
+    this.props.changeSelectedItems(e.target.checked, indexItem);
   }
 
   getToday() {
@@ -24,7 +24,6 @@ class TableBody extends Component {
   render() {
     const rows = this.props.items.map((item, index) => {
       const isToday = item.date === this.getToday();
-
       return (
         <tr
           key={index}
@@ -33,14 +32,14 @@ class TableBody extends Component {
             'tableBody__done': item.done,
           })}
         >
-          <td>{ index }</td>
           <td>
             <input
               type="checkbox"
-              checked={ item.done }
-              onChange={ (e) => this.handlerChangeDone(e, index) }
+              checked={ this.props.selectedItems.includes(index) }
+              onChange={ (e) => this.handlerChangeChecked(e, index) }
             />
           </td>
+          <td>{ index }</td>
           <td>{ item.title }</td>
           <td>{ item.priority }</td>
           <td>{ item.date }</td>

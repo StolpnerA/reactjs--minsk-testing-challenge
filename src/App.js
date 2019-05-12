@@ -23,26 +23,41 @@ class App extends Component {
     })
 
     this.setTask = this.setTask.bind(this);
-    this.changeStatusTask = this.changeStatusTask.bind(this);
+    this.changeStatusTasks = this.changeStatusTasks.bind(this);
+    this.deleteSelectedItems = this.deleteSelectedItems.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
   }
 
   setTask(task) {
     let { items } = this.state;
     items.push(task);
-    this.setState({
-      items,
+    updateTasks(items).then(() => {
+      this.setState({
+        items,
+      });
     });
-    updateTasks(items);
   }
 
-  changeStatusTask(value, indexItem) {
+  changeStatusTasks(indexItems) {
     const { items } = this.state;
-    items[indexItem].done = value;
-    this.setState({
-      items,
+    indexItems.forEach(indexItem => {
+      items[indexItem].done = !items[indexItem].done;
+    })
+    updateTasks(items).then(() => {
+      this.setState({
+        items,
+      });
     });
-    updateTasks(items);
+  }
+
+  deleteSelectedItems(indexItemsForDelete) {
+    const { items } = this.state;
+    const filteredItems = items.filter((item, index) => !indexItemsForDelete.includes(index));
+    updateTasks(filteredItems).then(() => {
+      this.setState({
+        items: filteredItems,
+      });
+    });
   }
 
   changeFilter(value, field) {
@@ -101,7 +116,8 @@ class App extends Component {
         />
         <TableItems
           items={ this.state.filteredItems || this.state.items }
-          changeStatusTask={ this.changeStatusTask }
+          changeStatusTasks={ this.changeStatusTasks }
+          deleteSelectedItems={ this.deleteSelectedItems }
         />
       </div>
     );

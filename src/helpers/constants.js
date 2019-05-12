@@ -5,7 +5,7 @@ const PRIORITY_OPTIONS = [
   'High',
 ];
 
-const COLUMNS = ["id", "done", "title", "priority", "date"]
+const COLUMNS = ["", "id", "title", "priority", "date"]
 
 const STORAGE_KEY = 'tasks'
 
