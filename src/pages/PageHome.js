@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import FormAddTask from '../components/FormAddTask';
 import FormFilter from '../components/FormFilter';
 import TableItems from '../components/TableItems';
+import TableActions from '../components/TableActions';
 
 import { updateTasks, getTasks } from '../api';
 import { FILTER_FIELDS } from '../helpers/constants';
@@ -14,6 +15,7 @@ class PageHome extends Component {
       items: [],
       filteredItems: null,
       filters: {},
+      selectedItems: [],
     };
 
     getTasks().then((tasks) => {
@@ -27,6 +29,10 @@ class PageHome extends Component {
     this.changeStatusTasks = this.changeStatusTasks.bind(this);
     this.deleteSelectedItems = this.deleteSelectedItems.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
+    this.handlerSelectedItems = this.handlerSelectedItems.bind(this);
+    this.handlerChangeStatusTasks = this.handlerChangeStatusTasks.bind(this);
+    this.handlerDeleteSelectedItems = this.handlerDeleteSelectedItems.bind(this);
+    this.clearSelectedItems = this.clearSelectedItems.bind(this);
   }
 
   setTask(task) {
@@ -107,18 +113,55 @@ class PageHome extends Component {
     });
   }
 
+  handlerSelectedItems(isChecked, indexItem) {
+    const { selectedItems } = this.state;
+    if (isChecked) {
+      this.setState({
+        selectedItems: [...selectedItems, indexItem],
+      });
+    } else {
+      this.setState({
+        selectedItems: selectedItems.filter(item => item !== indexItem),
+      });
+    }
+  }
+
+  handlerChangeStatusTasks() {
+    this.changeStatusTasks(this.state.selectedItems);
+    this.clearSelectedItems();
+  }
+
+  handlerDeleteSelectedItems() {
+    this.deleteSelectedItems(this.state.selectedItems);
+    this.clearSelectedItems();
+  }
+
+  clearSelectedItems() {
+    this.setState({
+      selectedItems: [],
+    });
+  }
+
   render() {
     return (
       <div>
-        <FormAddTask addTask={ this.setTask } />
+        <FormAddTask addTask={ this.setTask } />     
+        <hr />    
         <FormFilter
           isShow={ Boolean(this.state.items.length) }
           changeFilter={ this.changeFilter }
         />
+        <hr />    
         <TableItems
           items={ this.state.filteredItems || this.state.items }
-          changeStatusTasks={ this.changeStatusTasks }
-          deleteSelectedItems={ this.deleteSelectedItems }
+          selectedItems={ this.state.selectedItems }
+          selecteItems={ this.handlerSelectedItems }
+        />
+        <TableActions
+          isShow={ this.state.selectedItems.length !== 0 }
+          changeStatusTasks={ this.handlerChangeStatusTasks }
+          deleteSelectedItems={ this.handlerDeleteSelectedItems }
+          clearSelectedItems={ this.clearSelectedItems }
         />
       </div>
     )
