@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Tab } from 'semantic-ui-react';
 
 import FormAddTask from '../components/FormAddTask';
 import FormFilter from '../components/FormFilter';
@@ -143,27 +144,40 @@ class PageHome extends Component {
   }
 
   render() {
+    const panes = [
+      { 
+        menuItem: 'Tasks', render: () => (
+          <Tab.Pane>
+            <FormFilter
+              isShow={ Boolean(this.state.items.length) }
+              changeFilter={ this.changeFilter }
+            />
+            <hr />
+            <TableItems
+              items={ this.state.filteredItems || this.state.items }
+              selectedItems={ this.state.selectedItems }
+              selecteItems={ this.handlerSelectedItems }
+            />
+            <TableActions
+              isShow={ this.state.selectedItems.length !== 0 }
+              changeStatusTasks={ this.handlerChangeStatusTasks }
+              deleteSelectedItems={ this.handlerDeleteSelectedItems }
+              clearSelectedItems={ this.clearSelectedItems }
+            />
+          </Tab.Pane>
+        )
+      },
+      { 
+        menuItem: 'Add Task', render: () => (
+          <Tab.Pane>
+            <FormAddTask addTask={ this.setTask } />
+          </Tab.Pane>
+        )
+      },
+    ]
+
     return (
-      <div>
-        <FormAddTask addTask={ this.setTask } />     
-        <hr />    
-        <FormFilter
-          isShow={ Boolean(this.state.items.length) }
-          changeFilter={ this.changeFilter }
-        />
-        <hr />    
-        <TableItems
-          items={ this.state.filteredItems || this.state.items }
-          selectedItems={ this.state.selectedItems }
-          selecteItems={ this.handlerSelectedItems }
-        />
-        <TableActions
-          isShow={ this.state.selectedItems.length !== 0 }
-          changeStatusTasks={ this.handlerChangeStatusTasks }
-          deleteSelectedItems={ this.handlerDeleteSelectedItems }
-          clearSelectedItems={ this.clearSelectedItems }
-        />
-      </div>
+      <Tab panes={panes} />
     )
   }
 }

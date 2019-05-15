@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Input, Select, TextArea, Button } from 'semantic-ui-react';
+
 import './FormAddTask.css'
+
 import { PRIORITY_OPTIONS } from '../helpers/constants.js';
+
 const initState = {
   title: '',
   description: '',
@@ -18,9 +22,9 @@ class FormAddTask extends Component {
     this.handlerClick = this.handlerClick.bind(this);
   }
 
-  handlerChange(e, name) {
+  handlerChange(value, name) {
     this.setState({
-      [name]: e.target.value,
+      [name]: value,
     });
   }
 
@@ -32,49 +36,46 @@ class FormAddTask extends Component {
   render() {
     const priorityOptions = PRIORITY_OPTIONS.map(option => {
       return (
-        <option
-          key={ option }
-          value={ option }>
-          { option }
-        </option>
+        {
+          key: option,
+          text: option,
+          value: option,
+        }
       )
     })
     return (
       <div className="formAddTask">
         <div className="formAddTask__mainData">
           <div>
-            <input
+            <Input
               type="text"
               value={ this.state.title }
               placeholder="Title"
-              onChange={ (e) => this.handlerChange(e, 'title') }
+              onChange={ (e, { value }) => this.handlerChange(value, 'title') }
             />
           </div>
           <div>
-            <select
-              value={ this.state.priority }              
-              onChange={ (e) => this.handlerChange(e, 'priority') }>
-              { priorityOptions }
-            </select>
+            <Select
+              options={priorityOptions}
+              value={ this.state.priority }
+              placeholder='Select priority'
+              onChange={ (e, { value }) => this.handlerChange(value, 'priority') }
+            />
           </div>
           <div>
-            <input
+            <Input
               type="date"
               value={ this.state.date }
-              onChange={ (e) => this.handlerChange(e, 'date') }
+              onChange={ (e, { value }) => this.handlerChange(value, 'date') }
             />
           </div>
         </div>
-        <textarea
-          placeholder="Desctiption"
+        <TextArea
+          placeholder='Desctiption'
           value={ this.state.description }
-          onChange={ (e) => this.handlerChange(e, 'description') }
+          onChange={ (e, { value }) => this.handlerChange(value, 'description') }
         />
-        <input
-          type="submit"
-          value="Add"
-          onClick={ this.handlerClick }
-        />
+        <Button onClick={ this.handlerClick }>Add</Button>
       </div>
     )
   }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Checkbox, Input } from 'semantic-ui-react';
+
 import './FormFilter.css'
+
 import { FILTER_FIELDS } from '../helpers/constants';
 
 class FormFilter extends Component {
@@ -22,18 +25,20 @@ class FormFilter extends Component {
     return (
       <div className="formFilter">
         <div>
-          <input
-            type="checkbox"
-            onChange={ (e) => this.handlerChange(e.target.checked, FILTER_FIELDS.done) }/> Show completed
-          <input
-            type="date"
-            onChange={ (e) => this.handlerChange(e.target.value, FILTER_FIELDS.date) }
+          <Checkbox
+            toggle
+            label="Show completed"
+            onChange={ (e, value) => this.handlerChange(value.checked, FILTER_FIELDS.done) }
           />
+          <Input
+              type="date"
+              onChange={ (e, { value }) => this.handlerChange(value, FILTER_FIELDS.date) }
+            />
         </div>
-        <input
+        <Input
           type="text"
           placeholder="Text search (title + description)"
-          onChange={ (e) => this.handlerChange(e.target.value, FILTER_FIELDS.search) }
+          onChange={ (e, { value }) => this.handlerChange(value, FILTER_FIELDS.search) }
         />
       </div>
     )
