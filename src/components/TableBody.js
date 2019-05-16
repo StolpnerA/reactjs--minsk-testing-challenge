@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Checkbox, Table } from 'semantic-ui-react';
+
 import './TableBody.css';
+
 import { classList } from '../helpers/utils';
 
 class TableBody extends Component {
@@ -9,8 +12,8 @@ class TableBody extends Component {
     this.handlerChangeChecked = this.handlerChangeChecked.bind(this);
   }
 
-  handlerChangeChecked(e, indexItem) {
-    this.props.changeSelectedItems(e.target.checked, indexItem);
+  handlerChangeChecked(value, indexItem) {
+    this.props.changeSelectedItems(value, indexItem);
   }
 
   getToday() {
@@ -25,31 +28,31 @@ class TableBody extends Component {
     const rows = this.props.items.map((item, index) => {
       const isToday = item.date === this.getToday();
       return (
-        <tr
+        <Table.Row
           key={index}
+          warning={ isToday }
           className={classList({
-            'tableBody__today': isToday,
             'tableBody__done': item.done,
           })}
         >
-          <td>
-            <input
-              type="checkbox"
+          <Table.Cell collapsing>
+            <Checkbox
+              slider
               checked={ this.props.selectedItems.includes(index) }
-              onChange={ (e) => this.handlerChangeChecked(e, index) }
+              onChange={ (e, value) => this.handlerChangeChecked(value.checked, index) }
             />
-          </td>
-          <td>{ index }</td>
-          <td>{ item.title }</td>
-          <td>{ item.priority }</td>
-          <td>{ item.date }</td>
-        </tr>
+          </Table.Cell>
+          <Table.Cell>{ index }</Table.Cell>
+          <Table.Cell>{ item.title }</Table.Cell>
+          <Table.Cell>{ item.priority }</Table.Cell>
+          <Table.Cell>{ item.date }</Table.Cell>
+        </Table.Row>
       );
     })
     return (
-      <tbody>
+      <Table.Body>
         { rows }
-      </tbody>
+      </Table.Body>
     )
   }
 }
