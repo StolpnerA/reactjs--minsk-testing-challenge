@@ -2,9 +2,19 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5px;
 }
 
 .formAddTask__mainData {
   display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ui.button {
+  margin: 0;
+}
+
+.formAddTask__textarea,
+.formAddTask__btn {
+  margin-top: 10px !important;
 }

@@ -46,36 +46,36 @@ class FormAddTask extends Component {
     return (
       <div className="formAddTask">
         <div className="formAddTask__mainData">
-          <div>
-            <Input
-              type="text"
-              value={ this.state.title }
-              placeholder="Title"
-              onChange={ (e, { value }) => this.handlerChange(value, 'title') }
-            />
-          </div>
-          <div>
-            <Select
-              options={priorityOptions}
-              value={ this.state.priority }
-              placeholder='Select priority'
-              onChange={ (e, { value }) => this.handlerChange(value, 'priority') }
-            />
-          </div>
-          <div>
-            <Input
-              type="date"
-              value={ this.state.date }
-              onChange={ (e, { value }) => this.handlerChange(value, 'date') }
-            />
-          </div>
+          <Input
+            type="text"
+            value={ this.state.title }
+            placeholder="Title"
+            onChange={ (e, { value }) => this.handlerChange(value, 'title') }
+          />
+          <Select
+            options={priorityOptions}
+            value={ this.state.priority }
+            placeholder='Select priority'
+            onChange={ (e, { value }) => this.handlerChange(value, 'priority') }
+          />
+          <Input
+            type="date"
+            value={ this.state.date }
+            onChange={ (e, { value }) => this.handlerChange(value, 'date') }
+          />
         </div>
         <TextArea
-          placeholder='Desctiption'
+          className="formAddTask__textarea"
+          placeholder="Desctiption"
           value={ this.state.description }
           onChange={ (e, { value }) => this.handlerChange(value, 'description') }
         />
-        <Button onClick={ this.handlerClick }>Add</Button>
+        <Button
+          className="formAddTask__btn"
+          onClick={ this.handlerClick }
+        >
+          Add
+        </Button>
       </div>
     )
   }
