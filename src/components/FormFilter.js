@@ -24,18 +24,20 @@ class FormFilter extends Component {
 
     return (
       <div className="formFilter">
-        <div>
+        <div className="formFilter__block">
           <Checkbox
             toggle
             label="Show completed"
             onChange={ (e, value) => this.handlerChange(value.checked, FILTER_FIELDS.done) }
           />
           <Input
-              type="date"
-              onChange={ (e, { value }) => this.handlerChange(value, FILTER_FIELDS.date) }
-            />
+            className="formFilter__inputDate"
+            type="date"
+            onChange={ (e, { value }) => this.handlerChange(value, FILTER_FIELDS.date) }
+          />
         </div>
         <Input
+          className="formFilter__inputSearch"
           type="text"
           placeholder="Text search (title + description)"
           onChange={ (e, { value }) => this.handlerChange(value, FILTER_FIELDS.search) }

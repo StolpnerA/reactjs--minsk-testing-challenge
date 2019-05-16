@@ -1,3 +1,19 @@
 .formFilter {
+  max-width: 50%;
+  width: 100%;
+}
+
+.formFilter__block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formFilter__inputDate {
+  margin-left: 30px;
+}
+
+.formFilter__inputSearch {
   margin-top: 10px;
+  width: 100%;
 }
