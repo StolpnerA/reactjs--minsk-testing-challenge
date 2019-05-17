@@ -73,7 +73,9 @@ class PageHome extends Component {
     if (value) {
       filters[field] = value;
     } else {
-      delete filters[field];
+      if (field !== FILTER_FIELDS.done) {
+        delete filters[field];
+      }
     }
     this.filtering(filters);
   }
@@ -90,6 +92,10 @@ class PageHome extends Component {
     Object.keys(filters).forEach(field => {
       switch(field) {
         case FILTER_FIELDS.done:
+          filteringItems = filteringItems.filter(item => {
+            return item[field] === filters[field];
+          })
+          break;
         case FILTER_FIELDS.date:
           filteringItems = filteringItems.filter(item => {
             return item[field] === filters[field];
@@ -148,6 +154,7 @@ class PageHome extends Component {
       { 
         menuItem: 'Tasks', render: () => (
           <Tab.Pane>
+            <div>Added some task</div>
             <FormFilter
               isShow={ Boolean(this.state.items.length) }
               changeFilter={ this.changeFilter }
