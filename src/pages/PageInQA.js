@@ -8,7 +8,9 @@ class PageInQA extends Component {
   render() {
     return (
       <div>
-        inQA
+        Site: https://inqa.by/
+        Instagram: https://www.instagram.com/inqa.by/
+        Telegram: https://t.me/inqaby
       </div>
     )
   }

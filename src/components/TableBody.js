@@ -26,7 +26,7 @@ class TableBody extends Component {
 
   render() {
     const rows = this.props.items.map((item, index) => {
-      if (index === this.props.items.length - 1) return null;
+      if (this.props.items.length > 1 && index === this.props.items.length - 1) return null;
       
       const isToday = item.date === this.getToday();
       return (
