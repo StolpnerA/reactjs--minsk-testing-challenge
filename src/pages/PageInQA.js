@@ -8,9 +8,27 @@ class PageInQA extends Component {
   render() {
     return (
       <div>
-        Site: https://inqa.by/
-        Instagram: https://www.instagram.com/inqa.by/
-        Telegram: https://t.me/inqaby
+        <a
+          href="https://inqa.by/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Site
+        </a><br/>
+        <a
+          href="https://www.instagram.com/inqa.by/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Instagram
+        </a><br/>
+        <a
+          href="https://t.me/inqaby"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Telegram
+        </a><br/>
       </div>
     )
   }
