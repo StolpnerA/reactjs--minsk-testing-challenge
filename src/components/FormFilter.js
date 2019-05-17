@@ -3,13 +3,14 @@ import { Checkbox, Input } from 'semantic-ui-react';
 
 import './FormFilter.css'
 
-import { FILTER_FIELDS } from '../helpers/constants';
+import { FILTER_FIELDS, MIN_SEARCH_CHARS } from '../helpers/constants';
 
 class FormFilter extends Component {
   constructor(props) {
     super(props);
     
     this.handlerChange = this.handlerChange.bind(this);
+    this.handlerChangeSearch = this.handlerChangeSearch.bind(this);
   }
 
   handlerChange(value, field) {
@@ -17,6 +18,12 @@ class FormFilter extends Component {
       value = null;
     }
     this.props.changeFilter(value, field);
+  }
+
+  handlerChangeSearch(value) {
+    if (value.length === 0 || value.length >= MIN_SEARCH_CHARS) {
+      this.handlerChange(value, FILTER_FIELDS.search);
+    }
   }
 
   render() {
@@ -40,7 +47,7 @@ class FormFilter extends Component {
           className="formFilter__inputSearch"
           type="text"
           placeholder="Text search (title + description)"
-          onChange={ (e, { value }) => this.handlerChange(value, FILTER_FIELDS.search) }
+          onChange={ (e, { value }) => this.handlerChangeSearch(value) }
         />
       </div>
     )

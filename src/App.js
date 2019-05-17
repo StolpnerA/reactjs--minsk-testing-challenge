@@ -4,6 +4,8 @@ import { Grid, Menu, Segment } from 'semantic-ui-react';
 
 import PageAbout from './pages/PageAbout';
 import PageHome from './pages/PageHome';
+import PageInQA from './pages/PageInQA';
+import PageRegulation from './pages/PageRegulation';
 
 import './App.css'
 
@@ -38,6 +40,20 @@ class App extends Component {
                   active={this.state.activeItem === 'About'}
                   onClick={this.handleItemClick}
                 />
+                <Menu.Item
+                  name='inQA'
+                  as={Link}
+                  to='/inQA'
+                  active={this.state.activeItem === 'inQA'}
+                  onClick={this.handleItemClick}
+                />
+                <Menu.Item
+                  name='regulation'
+                  as={Link}
+                  to='/regulation'
+                  active={this.state.activeItem === 'regulation'}
+                  onClick={this.handleItemClick}
+                />
               </Menu>
             </Grid.Column>
 
@@ -53,30 +69,18 @@ class App extends Component {
                   path="/about"
                   component={ PageAbout }
                 />
+
+                <Route
+                  path="/inQA"
+                  component={ PageInQA }
+                />
+                <Route
+                  path="/regulation"
+                  component={ PageRegulation }
+                />
               </Segment>
             </Grid.Column>
           </Grid>
-          {/* <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about/">About</Link>
-              </li>
-            </ul>
-          </nav> */}
-
-          {/* <Route
-            exact
-            path="/"
-            component={ PageHome }
-          />
-
-          <Route
-            path="/about"
-            component={ PageAbout }
-          /> */}
         </Router>
       </div>
     );

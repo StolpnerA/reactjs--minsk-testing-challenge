@@ -5,7 +5,7 @@ const PRIORITY_OPTIONS = [
   'High',
 ];
 
-const COLUMNS = ["id", "title", "priority", "date"]
+const COLUMNS = ["id", "title", "priority", "date (dd.mm.yyyy)"]
 
 const STORAGE_KEY = 'tasks'
 
@@ -15,9 +15,12 @@ const FILTER_FIELDS = {
   search: 'search',
 }
 
+const MIN_SEARCH_CHARS = 3;
+
 export {
   PRIORITY_OPTIONS,
   COLUMNS,
   STORAGE_KEY,
   FILTER_FIELDS,
+  MIN_SEARCH_CHARS,
 };
