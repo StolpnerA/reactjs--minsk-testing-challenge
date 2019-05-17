@@ -46,7 +46,9 @@ class App extends Component {
                   to='/inQA'
                   active={this.state.activeItem === 'inQA'}
                   onClick={this.handleItemClick}
-                />
+                >
+                  inQA.by
+                </Menu.Item>
                 <Menu.Item
                   name='regulation'
                   as={Link}

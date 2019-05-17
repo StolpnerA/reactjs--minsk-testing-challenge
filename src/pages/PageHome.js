@@ -36,6 +36,10 @@ class PageHome extends Component {
     this.clearSelectedItems = this.clearSelectedItems.bind(this);
   }
 
+  componentDidMount() {
+    document.title = "Tasks";
+  }
+
   setTask(task) {
     let { items } = this.state;
     items.push(task);
